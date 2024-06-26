@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <h2>Registrar OST</h2>
+  <form>
+    <div class="form-group">
+      <label for="dniCliente">DNI Cliente:</label>
+      <div class="input-group">
+        <input type="text" class="form-control" id="dniCliente" placeholder="Ingrese DNI" [(ngModel)]="cliente.dni" name="dni">
+        <button class="btn btn-secondary" type="button" (click)="buscarCliente()">Buscar</button>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="cliente">
+      <label>Datos del Cliente:</label>
+      <p>{{ cliente.nombres }} {{ cliente.apellidos }}</p>
+      <p>{{ cliente.telefono }}</p>
+      <p>{{ cliente.direccion }}</p>
+    </div>
+
+    <div class="form-group">
+      <label for="placaVehiculo">Placa Vehículo:</label>
+      <input type="text" class="form-control" id="placaVehiculo" [(ngModel)]="vehiculo.placa" name="placaVehiculo">
+    </div>
+
+    <div class="form-group">
+      <label for="marcaVehiculo">Marca Vehículo:</label>
+      <input type="text" class="form-control" id="marcaVehiculo" [(ngModel)]="vehiculo.marca" name="marcaVehiculo">
+    </div>
+
+    <div class="form-group">
+      <label for="modeloVehiculo">Modelo Vehículo:</label>
+      <input type="text" class="form-control" id="modeloVehiculo" [(ngModel)]="vehiculo.modelo" name="modeloVehiculo">
+    </div>
+
+    <div class="form-group">
+      <label for="falla">Falla:</label>
+      <textarea class="form-control" id="falla" rows="3" [(ngModel)]="fallareportada" name="falla"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" (click)="registrarOST()">Crear OST</button>
+  </form>
+</div>

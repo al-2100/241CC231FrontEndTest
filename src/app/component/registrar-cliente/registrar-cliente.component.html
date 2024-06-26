@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="row">
+    <div class="card">
+      <div class="card-body">
+        <h5>Registrar Clientes</h5>
+        <form class="row" [formGroup]="clienteForm">
+          <div class="form-group">
+            <label for="nombres">Nombres:</label>
+            <input type="text" class="form-control" id="nombres" formControlName="nombres">
+          </div>
+          <div class="form-group">
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" class="form-control" id="apellidos" formControlName="apellidos">
+          </div>
+          <div class="form-group">
+            <label for="dni">DNI:</label>
+            <input type="text" class="form-control" id="dni" formControlName="dni">
+          </div>
+          <div class="form-group">
+            <label for="sexo">Sexo:</label>
+            <select class="form-control" id="sexo" formControlName="sexo">
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="direccion">Dirección:</label>
+            <input type="text" class="form-control" id="direccion" formControlName="direccion">
+          </div>
+          <div class="form-group">
+            <label for="telefono">Teléfono:</label>
+            <input type="text" class="form-control" id="telefono" formControlName="telefono">
+          </div>
+          <button type="submit" class="btn btn-primary mt-3" (click)="registrarCliente()">Registrar</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Apellidos</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let cliente of clienteArray; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ cliente.nombres }}</td>
+            <td>{{ cliente.apellidos }}</td>
+            <td>{{ cliente.dni }}</td>
+            <td>{{ cliente.sexo }}</td>
+            <td>{{ cliente.direccion }}</td>
+            <td>{{ cliente.telefono }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="editarCliente(cliente)">Editar</button> <!-- Botón de editar -->
+              <button class="btn btn-danger" (click)="eliminarCliente(cliente)">Eliminar</button> <!-- Botón de eliminar -->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

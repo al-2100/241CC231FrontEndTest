@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-12">
+    <label for="search">Buscar problema:</label>
+    <input type="text" id="search" class="form-control" (input)="onSearch($event)">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>Problema</th>
+          <th>Solución</th>
+          <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let bitacora of bitacoraArray; let i = index">
+          <td>{{bitacora.descripcion}}</td>
+          <td>{{bitacora.solucion}}</td>
+          <td>
+            <button class="btn btn-primary" (click)="editarBitacora(bitacora)">Editar</button>
+            <button class="btn btn-danger" (click)="eliminarBitacora(bitacora)">Eliminar</button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showForm">
+    <div class="col-md-12">
+      <form [formGroup]="bitacoraForm" (ngSubmit)="registrarBitacora()">
+        <div class="form-group">
+          <label for="descripcion">Problema</label>
+          <input type="text" id="descripcion" class="form-control" formControlName="descripcion">
+        </div>
+        <div class="form-group">
+          <label for="solucion">Solución</label>
+          <input type="text" id="solucion" class="form-control" formControlName="solucion">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
+  </div>
+</div>
