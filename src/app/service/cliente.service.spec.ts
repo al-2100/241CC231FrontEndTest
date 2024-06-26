@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ClienteService } from './cliente.service';
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Cliente } from '../model/cliente';
 
 describe('ClienteService', () => {
   let service: ClienteService;
@@ -9,19 +10,21 @@ describe('ClienteService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [HttpClientModule]});
     service = TestBed.inject(ClienteService);
+    
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
   
+
   it('getCliente', (done : DoneFn) => {
     service.getClientes().subscribe((value) => {
       expect(value).toBeInstanceOf(Array);
       done();
     });
   });
-  
+
   it('RegistrarCliente', (done: DoneFn) => {
     let cliente1: Cliente;
     const cliente: Cliente = {
@@ -42,4 +45,6 @@ describe('ClienteService', () => {
 
      
   });
+
+ 
 });
