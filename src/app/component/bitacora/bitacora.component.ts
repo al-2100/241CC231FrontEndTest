@@ -120,7 +120,7 @@ export class BitacoraComponent implements OnInit {
     this.bitacoraService.getBitacoras().subscribe(
       (result: any) => {
         this.bitacora = result;
-        this.bitacoraArray = [...this.bitacora]; // Asegúrate de que bitacoraArray se actualiza cuando los datos se cargan
+        this.bitacoraArray = [...this.bitacora]; // BitacoraArray se actualiza cuando los datos se cargan
         this.filterBitacora(); // Filtra los datos después de cargarlos
       },
       (err: any) => {
@@ -137,7 +137,7 @@ export class BitacoraComponent implements OnInit {
         bitacora.descripcion.toLowerCase().includes(value)
       );
     } else {
-      this.bitacoraArray = [...this.bitacora]; // Asegúrate de que bitacoraArray se actualiza cuando el valor de búsqueda está vacío
+      this.bitacoraArray = [...this.bitacora]; // BitacoraArray se actualiza cuando el valor de búsqueda está vacío
     }
   }
 

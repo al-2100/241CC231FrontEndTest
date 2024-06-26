@@ -17,14 +17,13 @@ export class BitacoraService {
   getBitacoras(): Observable<Bitacora[]> {
     return this.http.get<Bitacora[]>(`${this.BASE_URL}/listar`);
   }
-  editarBitacora(bitacora: Bitacora) {
-    return this.http.post(`${this.BASE_URL}/update`, bitacora);
-  }
   registrarBitacora(bitacora: Bitacora) {
-    return this.http.post(`${this.BASE_URL}/insert`, bitacora);
-
+    return this.http.post<Bitacora>(`${this.BASE_URL}/insert`, bitacora);
   }
 
+  editarBitacora(bitacora: Bitacora) {
+    return this.http.post<Bitacora>(`${this.BASE_URL}/update`, bitacora);
+  }
   eliminarBitacora(bitacora: Bitacora) {
     return this.http.delete(`${this.BASE_URL}/delete`, { body: bitacora});
   }
