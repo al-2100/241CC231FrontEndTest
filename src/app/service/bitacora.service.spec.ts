@@ -34,6 +34,7 @@ describe('ProblemaTecnicoService', () => {
     };
 
     service.registrarBitacora(nuevaBitacora).subscribe((bitacoraCreada: Bitacora) => {
+      expect(bitacoraCreada).toEqual(nuevaBitacora);
       done();
     }, (error) => {
       console.error('Error:', error);

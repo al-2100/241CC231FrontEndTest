@@ -10,13 +10,13 @@ describe('ClienteService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({imports: [HttpClientModule]});
     service = TestBed.inject(ClienteService);
-    
+
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
-  
+
 
   it('getCliente', (done : DoneFn) => {
     service.getClientes().subscribe((value) => {
@@ -26,9 +26,8 @@ describe('ClienteService', () => {
   });
 
   it('RegistrarCliente', (done: DoneFn) => {
-    let cliente1: Cliente;
     const cliente: Cliente = {
-      id_cliente: 91,
+      id_cliente: 0,
       dni: '7854632',
       nombres: 'name_test',
       apellidos: 'lastname_test',
@@ -37,14 +36,25 @@ describe('ClienteService', () => {
       telefono:'123459876',
 
     };
-    
+
     service.registrarCliente(cliente).subscribe((value) =>{
       expect(value).toEqual(cliente);
       done();
     });
 
-     
   });
 
- 
+  it('eliminarCliente', (done: DoneFn) => {
+    service.getClientes().subscribe((clientes) => {
+      const ultimoCliente = clientes[clientes.length - 1];
+      service.eliminarCliente(ultimoCliente).subscribe(() => {
+        service.getClientes().subscribe((clientesActualizados) => {
+          const clienteEliminado = clientesActualizados.find(c => c.id_cliente === ultimoCliente.id_cliente);
+          expect(clienteEliminado).toBeFalsy();
+          done();
+        });
+      });
+    });
+  });
+
 });
