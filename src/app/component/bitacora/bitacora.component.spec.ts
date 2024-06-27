@@ -1,5 +1,5 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
-import { HttpClientModule } from '@angular/common/http';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BitacoraComponent } from './bitacora.component';
@@ -9,15 +9,17 @@ describe('BitacoraComponent', () => {
   let component: BitacoraComponent;
   let fixture: ComponentFixture<BitacoraComponent>;
   let bitacora: Bitacora;
+  let httpMock: HttpTestingController;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientModule, ReactiveFormsModule, BitacoraComponent],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, BitacoraComponent],
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(BitacoraComponent);
     component = fixture.componentInstance;
+    httpMock = TestBed.inject(HttpTestingController);
     fixture.detectChanges();
 
     bitacora = {
@@ -25,6 +27,12 @@ describe('BitacoraComponent', () => {
       descripcion: 'Testeo descripcion',
       solucion: 'Testeo solucion'
     };
+    const req = httpMock.expectOne('http://localhost:8080/api/v1/problemas/listar');
+    req.flush([]);
+  });
+
+  afterEach(() => {
+    httpMock.verify(); // Verifica que no hay solicitudes pendientes
   });
 
   it('should create', () => {
