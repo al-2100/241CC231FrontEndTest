@@ -4,12 +4,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BitacoraComponent } from './bitacora.component';
 import { Bitacora } from '../../model/bitacora';
+import {getConexionBackend} from "../../utils/constants";
 
 describe('BitacoraComponent', () => {
   let component: BitacoraComponent;
   let fixture: ComponentFixture<BitacoraComponent>;
   let bitacora: Bitacora;
   let httpMock: HttpTestingController;
+  let BASE_URL: string;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,7 +29,8 @@ describe('BitacoraComponent', () => {
       descripcion: 'Testeo descripcion',
       solucion: 'Testeo solucion'
     };
-    const req = httpMock.expectOne('http://localhost:8080/api/v1/problemas/listar');
+    BASE_URL = getConexionBackend() + '/problemas';
+    const req = httpMock.expectOne(BASE_URL + '/listar');
     req.flush([]);
   });
 
